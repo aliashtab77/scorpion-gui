@@ -1,16 +1,21 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from telethon.sync import TelegramClient
+from config import DATABASE_NAME, DATABASE_HOST, DATABASE_PASSWORD, DATABASE_USER, API_ID, API_HASH
+import mysql.connector
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# with mysql.connector.connect(database=DATABASE_NAME, user=DATABASE_USER, host=DATABASE_HOST, password=DATABASE_PASSWORD) as connection:
+#     with connection.cursor() as cursor:
+#         sql = f"SHOW TABLES"
+#         cursor.execute(sql)
+#         tables = cursor.fetchall()
+#         for table in tables:
+#             print(table[0])
+#     connection.commit()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+client = TelegramClient('session', api_id=API_ID, api_hash=API_HASH)
+client.start()
+from telethon.tl.types import PeerUser, PeerChat, PeerChannel
+
+my_user  = client.send_message(136724293, "hi")
+print(my_user)
